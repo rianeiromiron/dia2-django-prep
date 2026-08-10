@@ -11,7 +11,7 @@ class ComentarioInline(admin.TabularInline):
 class TramiteAdmin(admin.ModelAdmin):
     list_display = ("nombre", "estado", "fecha_creacion", "fecha_actualizacion")
     list_filter = ("estado",)
-    search_fields = ("nombre", "descripcion")
+    search_fields = ("nombre", "descripcion","responsable")
     inlines = [ComentarioInline]  # noqa: RUF012
 
 @admin.register(Comentario)

@@ -1,2 +1,5 @@
 [tool.ruff]
 exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+ignore = ["EXE002"]

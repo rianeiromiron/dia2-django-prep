@@ -13,20 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
+      - name: Build and start services
+        run: docker compose up --build -d
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+      - name: Wait for Django to be ready
+        run: sleep 10
 
       - name: Run Ruff
-        run: ruff check .
+        run: docker compose exec -T django ruff check .
 
       - name: Run mypy
-        run: mypy .
+        run: docker compose exec -T django mypy .
 
       - name: Run tests
-        run: python manage.py test
+        run: docker compose exec -T django python manage.py test
+
+      - name: Tear down
+        if: always()
+        run: docker compose down

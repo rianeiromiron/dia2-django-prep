@@ -21,6 +21,8 @@ class TramiteSerializer(serializers.ModelSerializer):
             "nombre",
             "descripcion",
             "estado",
+            "responsable",
+            "correo_responsable",
             "fecha_creacion",
             "fecha_actualizacion",
             "comentarios",

@@ -17,7 +17,8 @@ class Tramite(models.Model):
     )
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
-
+    responsable = models.CharField(max_length=200, blank=True)
+    correo_responsable = models.EmailField(blank=True)
     def __str__(self) -> str:
         return self.nombre
 
@@ -28,3 +29,12 @@ class Comentario(models.Model):
 
     def __str__(self) -> str:
         return f"Comentario en {self.tramite.nombre}"
+
+class EventoOutbox(models.Model):
+    tipo = models.CharField(max_length=100)
+    payload = models.JSONField()
+    publicado = models.BooleanField(default=False)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"{self.tipo} (publicado={self.publicado})"
