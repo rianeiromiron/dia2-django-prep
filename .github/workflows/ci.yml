@@ -13,8 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build and start services
-        run: docker compose up --build -d
+      - name: Build and start Django + Redis + Celery
+        run: docker compose up --build -d redis django celery-worker
 
       - name: Wait for Django to be ready
         run: sleep 10
